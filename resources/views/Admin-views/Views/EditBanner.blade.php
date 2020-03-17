@@ -32,6 +32,9 @@
                 <label for="">Ảnh banner</label>
                 <input type="file" class="form-control" name="upload">
                 <img src="{{url('')}}/public/upload/banner/{{$ban->banner_image}}" width="60px" alt="">
+                @if($errors->has('upload'))
+                  {{$errors->first('upload')}}
+                @endif
               </div>
             
               <button type="submit" class="btn btn-primary">Xác nhận</button>

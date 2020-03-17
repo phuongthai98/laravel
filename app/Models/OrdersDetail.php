@@ -11,7 +11,7 @@ class Orders extends Model
      * summary
      */
     protected $table = 'orders_detail';
-    protected $fillable = ['order','order_note','user_id','status'];
+    protected $fillable = ['order_id','product_id','price','quantity'];
 
     protected $hidden = ['token'];
     public $timestamps = false;

@@ -59,10 +59,13 @@
               <div class="form-group">
                 <label>Ảnh sản phẩm</label>
                 <input type="file" class="form-control" name="upload" >
+                @if($errors->has('upload'))
+                  {{$errors->first('upload')}}
+                @endif
               </div>
             
               <button type="submit" class="btn btn-primary">Xác nhận</button>
-              <a href="products.php" class="btn btn-primary">Quay lại</a>
+              <a href="{{route('products')}}" class="btn btn-primary">Quay lại</a>
             </form>
           </div>
         </div>

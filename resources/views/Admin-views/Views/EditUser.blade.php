@@ -58,6 +58,9 @@
               <div class="form-group">
                 <label>Avatar</label>
                 <input type="file" class="form-control" name="upload" >
+                @if($errors->has('upload'))
+                  {{$errors->first('upload')}}
+                @endif
                 @if(!empty($edit->image))
                 <img src="{{url('')}}/public/upload/avatar/{{$edit->image}}" width="50px" alt="">
                 @else

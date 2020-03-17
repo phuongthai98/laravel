@@ -59,6 +59,9 @@
               <div class="form-group">
                 <label>Avatar</label>
                 <input type="file" class="form-control" name="upload" >
+                @if($errors->has('upload'))
+                  {{$errors->first('upload')}}
+                @endif
               </div>
             
               <button type="submit" class="btn btn-primary">Xác nhận</button>

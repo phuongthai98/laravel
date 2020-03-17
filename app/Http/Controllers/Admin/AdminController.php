@@ -190,10 +190,17 @@ class AdminController extends Controller
     {
         // dd($rq);
 
+        $this->validate($rq,[
+            'upload' => 'image|max:5120'
+        ],[
+            'upload.image' => 'Định dạng không cho phép!',
+            'upload.max' => 'Kích thước file quá lớn',
+        ]);
+
         $file = $rq->file('upload');
         // getClientOriginalNam để lấy tên gốc của ảnh
         $image = time().'-'.$file->getClientOriginalName('upload');
-        $file->move('public/upload/products',$image);
+        
         if ($add = Products::create([
             'catalog_id' => $rq->catalog_id,
             'product_name' => $rq->name,
@@ -202,6 +209,7 @@ class AdminController extends Controller
             'content' => $rq->content,
             'image' => $image,
             'description' => $rq->description])) {
+            $file->move('public/upload/products',$image);
             return redirect()->route('products')->with('success','Thêm sản phẩm thành công');
         }else{
             return redirect()->route('products')->with('error','Thêm sản phẩm thất bại');
@@ -228,13 +236,21 @@ class AdminController extends Controller
             $pro->sale_price = $rq->sale_price;
             $pro->content = $rq->content;
             $pro->description = $rq->description;
+
+            $this->validate($rq,[
+            'upload' => 'image|max:2028'
+            ],[
+                'upload.image' => 'Định dạng không cho phép!',
+                'upload.max' => 'Kích thước file quá lớn',
+            ]);
             if ($rq->hasFile('upload')) {
                 $file = $rq->file('upload');
                 $image = time().'-'.$file->getClientOriginalName('upload');
-                $file->move('public/upload/products',$image);
+                
                 $pro->image = $image;
                 $pro->save();
                 if ($up = $pro) {
+                    $file->move('public/upload/products',$image);
                     return redirect()->route('products')->with('success','Đã sửa !');
                 }
             }else{
@@ -280,6 +296,13 @@ class AdminController extends Controller
     }
     public function post_addBan(Request $rq)
     {   
+        $this->validate($rq,[
+            'upload' => 'image|max:2028'
+        ],[
+            'upload.image' => 'Định dạng không cho phép!',
+            'upload.max' => 'Kích thước file quá lớn',
+        ]);
+
         $file = $rq->file('upload');
         $image = time().'-'.$file->getClientOriginalName('upload');
         $file->move('public/upload/banner',$image);
@@ -289,6 +312,7 @@ class AdminController extends Controller
             'image' => $image
         ]);
         if ($up) {
+        $file->move('public/upload/banner',$image);
             return redirect()->route('banner')->with('success','Thêm banner thành công!');
         }
     }
@@ -305,13 +329,21 @@ class AdminController extends Controller
         
         $ban->status = $rq->status;
         $ban->type = $rq->type;
+
+        $this->validate($rq,[
+            'upload' => 'image|max:2028'
+        ],[
+            'upload.image' => 'Định dạng không cho phép!',
+            'upload.max' => 'Kích thước file quá lớn',
+        ]);
             if ($rq->hasFile('upload')) {
                 $file = $rq->file('upload');
                 $image = time().'-'.$file->getClientOriginalName('upload');
-                $file->move('public/upload/banner',$image);
+               
                 $ban->banner_image = $image;
                 $ban->save();
                 if ($ban) {
+                    $file->move('public/upload/banner',$image);
                     return redirect()->route('banner')->with('success','Sửa thành công!');
                 }
             }else {
@@ -376,10 +408,16 @@ class AdminController extends Controller
         //         'password.min' => 'Password phải chứa ít nhất 6 ký tự!',
         //         'password.max' => 'Password không được nhiều hơn 20 ký tự!',
         //     ]);
+
+        $this->validate($rq,[
+            'upload' => 'image|max:2028'
+        ],[
+            'upload.image' => 'Định dạng không cho phép!',
+            'upload.max' => 'Kích thước file quá lớn',
+        ]);
          $file = $rq->file('upload');
         // getClientOriginalNam để lấy tên gốc của ảnh
         $image = time().'-'.$file->getClientOriginalName('upload');
-        $file->move('public/upload/avatar',$image);
         $add = Users::create([
             'user_name' => $rq->user_name,
             'full_name' => $rq->full_name,
@@ -390,6 +428,7 @@ class AdminController extends Controller
             'address' => $rq->address
         ]);
         if ($add) {
+        $file->move('public/upload/avatar',$image);
             return redirect()->route('users')->with('success','Thêm người dùng thành công!');
         }
     
@@ -417,13 +456,20 @@ class AdminController extends Controller
             $edit->password = bcrypt($rq->pass);
             $edit->phone = $rq->phone;
             $edit->address = $rq->address;
+
+            $this->validate($rq,[
+                'upload' => 'image|max:2028'
+            ],[
+                'upload.image' => 'Định dạng không cho phép!',
+                'upload.max' => 'Kích thước file quá lớn',
+            ]);
             if ($rq->hasFile('upload')) {
                 $file = $rq->file('upload');
                 $image = time().'-'.$file->getClientOriginalName('upload');
-                $file->move('public/upload/avatar',$image);
                 $edit->image = $image;
                 $edit->save();
                 if ($up = $edit) {
+                $file->move('public/upload/avatar',$image);
                     return redirect()->route('users')->with('success','Chỉnh sửa thành công!');
                 }
             }else{

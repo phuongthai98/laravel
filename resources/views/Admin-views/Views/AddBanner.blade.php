@@ -22,6 +22,9 @@
               <div class="form-group">
                 <label>Ảnh Banner</label>
                 <input type="file" class="form-control" name="upload">
+                @if($errors->has('upload'))
+                  {{$errors->first('upload')}}
+                @endif
               </div>
               <div class="form-group">
                 <label for="">Status</label>
