@@ -222,7 +222,7 @@
                                                     </div>
                                                 </li>
                                                 <li><a href="category_list.php"><span><i class="fa fa-leaf"></i></span>Featured</a></li>
-                                                <li><a href="contact_us.php"><span><i class="fa fa-envelope"></i></span>Contact</a></li>
+                                                <li><a href="{{route('contact')}}"><span><i class="fa fa-envelope"></i></span>Contact</a></li>
                                             </ul>                       
                                         </nav>
                                     </div>

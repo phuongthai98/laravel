@@ -36,6 +36,8 @@ Route::get('home_logout','HomeController@home_log_out')->name('home_logout');
 Route::get('order','OrderController@order')->name('order');
 Route::post('order','OrderController@sub_order')->name('order');
 
+Route::get('contact','MailController@contact')->name('contact');
+Route::post('contact','MailController@send_contact')->name('contact');
 
 
 

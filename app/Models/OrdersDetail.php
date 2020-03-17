@@ -10,8 +10,8 @@ class Orders extends Model
     /**
      * summary
      */
-    protected $table = 'orders';
-    protected $fillable = ['order','order_note','status','full_name','address','phone'];
+    protected $table = 'orders_detail';
+    protected $fillable = ['order','order_note','user_id','status'];
 
     protected $hidden = ['token'];
     public $timestamps = false;

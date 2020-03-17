@@ -5,7 +5,14 @@
 	<div class="container">
 		
 		<div class="row">
-			
+			@if(Session::has('error'))
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				
+				{!! Session::get('error') !!}
+			</div>
+			@endif
+
 			<div class="col-md-4">
 				<form action="" method="POST" role="form">
 					<legend>Thông tin đặt hàng</legend>
@@ -14,33 +21,43 @@
 				@if(isset(Auth::guard('cus')->user()->email))
 					<div class="form-group">
 						<label for="">Tên đầy đủ</label>
-						<input type="text" class="form-control" name="full_name" value="{{Auth::guard('cus')->user()->full_name}}" placeholder="Your name">
+						<input type="text" class="form-control" name="full_name" value="{{Auth::guard('cus')->user()->full_name}}" placeholder="Your name" required="">
 					</div>
 					<div class="form-group">
 						<label for="">Địa chỉ</label>
-						<input type="text" class="form-control" name="address" value="{{Auth::guard('cus')->user()->address}}" placeholder="Your address">
+						<input type="text" class="form-control" name="address" value="{{Auth::guard('cus')->user()->address}}" placeholder="Your address" required="">
 					</div>
 					<div class="form-group">
 						<label for="">Số điện thoại</label>
-						<input type="text" class="form-control" name="phone" value="{{Auth::guard('cus')->user()->phone}}" placeholder="Your phone number">
+						<input type="text" class="form-control" name="phone" value="{{Auth::guard('cus')->user()->phone}}" placeholder="Your phone number" required="">
 					</div>
+					<div class="form-group">
+						<label for="">Ghi chú</label>
+						<textarea name="order_note" id="input" class="form-control" rows="3" placeholder="Text here ..."></textarea>
+					</div>
+
 				@else
 				
 					<div class="form-group">
 						<label for="">Tên đầy đủ</label>
-						<input type="text" class="form-control" name="full_name" placeholder="Your name">
+						<input type="text" class="form-control" name="full_name" placeholder="Your name" required="">
 					</div>
 					<div class="form-group">
 						<label for="">Địa chỉ</label>
-						<input type="text" class="form-control" name="address" placeholder="Your address">
+						<input type="text" class="form-control" name="address" placeholder="Your address" required="">
 					</div>
 					<div class="form-group">
 						<label for="">Số điện thoại</label>
-						<input type="text" class="form-control" name="phone" placeholder="Your phone number">
+						<input type="text" class="form-control" name="phone" placeholder="Your phone number" required="">
+					</div>
+					<div class="form-group">
+						<label for="">Ghi chú</label>
+						<textarea name="order_note" id="input" class="form-control" rows="3" placeholder="Text here ..."></textarea>
 					</div>
 				@endif
 
-					<button type="submit" class="btn btn-primary">Xác nhận</button>
+					<a href="{{route('cart')}}" class="btn btn-primary pull-left">Quay lại giỏ hàng</a>
+					<button type="submit" class="btn btn-primary pull-right">Xác nhận</button>
 				</form>
 			</div>
 

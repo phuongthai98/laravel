@@ -6,6 +6,18 @@
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
 						<div class="single_cart_list table-responsive">
+								@if(Session::has('success'))
+							<div class="alert alert-success">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								{!! Session::get('success') !!}
+							</div>
+								@endif
+								@if(Session::has('error'))
+							<div class="alert alert-danger">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								{!! Session::get('error') !!}
+							</div>
+								@endif
 							<table class="table">
 								<tr>
 									<th>Hình ảnh</th>
@@ -44,6 +56,7 @@
 									</div>
 									<div class="total">
 										<a href="{{route('order')}}" class="btn btn-primary">Đặt hàng</a>
+										<a href="{{route('home')}}" class="btn btn-primary pull-right">Tiếp tục mua hàng</a>
 									</div>
 								</div>
 							</div>

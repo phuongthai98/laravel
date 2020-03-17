@@ -25,9 +25,14 @@ class CartController extends Controller
     }
     public function update(CartHelper $cart, $id)
     {
-        $quantity = request()->quantity ? request()->quantity : 1 ;
-    	$cart->update($id,$quantity);
-    	return redirect()->back();
+        if (request()->quantity >= 1) {
+            $quantity = request()->quantity ? request()->quantity : 1 ;
+            $cart->update($id,$quantity);
+            return redirect()->back();
+        }else{
+            return redirect()->back()->with('error','Số lượng sản phẩm không đc nhỏ hơn 1!');
+        }
+        
     }
     public function clear(CartHelper $cart)
     {
