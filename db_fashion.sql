@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2020 at 09:12 AM
+-- Generation Time: Mar 17, 2020 at 06:25 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.27
 
@@ -124,9 +124,25 @@ CREATE TABLE `orders` (
   `id` bigint(20) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `order_note` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `status` tinyint(4) NOT NULL
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `full_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_date`, `order_note`, `status`, `full_name`, `address`, `phone`) VALUES
+(1, '2020-03-16 14:56:51', NULL, 0, 'Nguyen Phuong Thai', 'Ha Noi', 971874749),
+(2, '2020-03-16 16:45:39', 'sadasd11111111111111111111111', 0, 'Nguyen Phuong Thai', 'Ha Noi', 971874749),
+(3, '2020-03-16 16:46:00', 'sadasd11111111111111111111111', 0, 'Nguyen Phuong Thai', 'Ha Noi', 971874749),
+(4, '2020-03-16 16:56:09', 'sadasd11111111111111111111111', 0, 'Nguyen Phuong Thai', 'Ha Noi', 971874749),
+(5, '2020-03-16 17:00:18', 'sadasd11111111111111111111111', 0, 'Nguyen Phuong Thai', 'Ha Noi', 971874749),
+(6, '2020-03-16 17:03:14', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 0, 'Nguyen Phuong Thai', 'Ha Noi', 971874749),
+(7, '2020-03-16 17:04:33', NULL, 0, 'Nguyen Phuong Thai', 'Ha Noi', 971874749),
+(8, '2020-03-16 17:08:18', 'sdsdff', 0, 'Nguyen Phuong Thai2', 'hn', 113);
 
 -- --------------------------------------------------------
 
@@ -172,8 +188,7 @@ INSERT INTO `products` (`id`, `catalog_id`, `product_name`, `price`, `sale_price
 (4, 1, 'Đồng hồ nam', '77777.0000', NULL, 'Đồng hồ nam HOT', '1581958325-cat-6.jpg', 'asdsad', '2020-02-17 16:52:05', '2020-02-17 16:52:05'),
 (5, 2, 'efdvbdfgerfds', '5555.0000', NULL, NULL, '1581958340-best_sale.jpg', 'sadsad', '2020-02-17 16:52:20', '2020-02-17 16:52:20'),
 (6, 2, 'Đồng hồ nam111', '11133423.0000', NULL, 'Đừng mua !', '1581958371-fetured_3.jpg', 'asdsad', '2020-02-17 16:52:51', '2020-02-17 16:52:51'),
-(7, 1, 'abc555555555', '5555.0000', NULL, 'dededede', '1581958393-fetured_1.jpg', 'sadsad', '2020-02-17 16:53:13', '2020-02-17 16:53:13'),
-(8, 3, 'Clothing', '34234.0000', '324234.0000', 'sđs', '1583547432-LBP2900-R150-V330-W64-uk-EN-2.exe', 'dsfd', '2020-03-07 02:17:12', '2020-03-07 02:17:12');
+(7, 1, 'abc555555555', '5555.0000', NULL, 'dededede', '1581958393-fetured_1.jpg', 'sadsad', '2020-02-17 16:53:13', '2020-02-17 16:53:13');
 
 -- --------------------------------------------------------
 
@@ -229,7 +244,8 @@ ALTER TABLE `catalogs`
 -- Indexes for table `comment`
 --
 ALTER TABLE `comment`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `orders`
@@ -291,7 +307,7 @@ ALTER TABLE `comment`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `orders_detail`
@@ -303,7 +319,7 @@ ALTER TABLE `orders_detail`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -311,7 +327,17 @@ ALTER TABLE `products`
 ALTER TABLE `users`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
+--
+-- Constraints for dumped tables
+--
 
+--
+-- Constraints for table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
 -- Constraints for table `orders_detail`
 --
 ALTER TABLE `orders_detail`
