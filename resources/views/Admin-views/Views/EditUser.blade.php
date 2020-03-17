@@ -28,6 +28,19 @@
               {!! Session::get('error') !!}
             </div>
             @endif
+            @if(count($errors) > 0)
+              <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Upload Validation Error<br>
+                <ul>
+                 @foreach($errors->all() as $error)
+                  <li>
+                    {{$error}}
+                  </li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
             <form action="" method="POST" enctype="multipart/form-data" >
               <legend>Thay đổi thông tin tài khoản</legend>
               <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -58,9 +71,6 @@
               <div class="form-group">
                 <label>Avatar</label>
                 <input type="file" class="form-control" name="upload" >
-                @if($errors->has('upload'))
-                  {{$errors->first('upload')}}
-                @endif
                 @if(!empty($edit->image))
                 <img src="{{url('')}}/public/upload/avatar/{{$edit->image}}" width="50px" alt="">
                 @else

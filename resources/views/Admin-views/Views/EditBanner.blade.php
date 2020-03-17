@@ -16,6 +16,19 @@
 
         <div class="container-fluid">
           <div class="col-md-4">
+            @if(count($errors) > 0)
+              <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                Upload Validation Error<br>
+                <ul>
+                 @foreach($errors->all() as $error)
+                  <li>
+                    {{$error}}
+                  </li>
+                  @endforeach
+                </ul>
+              </div>
+            @endif
             <form action="" method="POST" role="form" enctype="multipart/form-data">
               <legend>Chỉnh sửa banner</legend>
               <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -32,9 +45,6 @@
                 <label for="">Ảnh banner</label>
                 <input type="file" class="form-control" name="upload">
                 <img src="{{url('')}}/public/upload/banner/{{$ban->banner_image}}" width="60px" alt="">
-                @if($errors->has('upload'))
-                  {{$errors->first('upload')}}
-                @endif
               </div>
             
               <button type="submit" class="btn btn-primary">Xác nhận</button>

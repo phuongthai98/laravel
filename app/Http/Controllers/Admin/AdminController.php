@@ -191,10 +191,11 @@ class AdminController extends Controller
         // dd($rq);
 
         $this->validate($rq,[
-            'upload' => 'image|max:5120'
+            'upload' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ],[
-            'upload.image' => 'Định dạng không cho phép!',
-            'upload.max' => 'Kích thước file quá lớn',
+            'upload.image' => 'File tải lên không phải định dạng ảnh!',
+            'upload.mimes' => 'File tải lên phải có đuôi: jpeg, png, jpg, gif',
+            'upload.max' => 'File tải lên không đc quá 2MB!'
         ]);
 
         $file = $rq->file('upload');
@@ -238,11 +239,12 @@ class AdminController extends Controller
             $pro->description = $rq->description;
 
             $this->validate($rq,[
-            'upload' => 'image|max:2028'
-            ],[
-                'upload.image' => 'Định dạng không cho phép!',
-                'upload.max' => 'Kích thước file quá lớn',
-            ]);
+            'upload' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ],[
+            'upload.image' => 'File tải lên không phải định dạng ảnh!',
+            'upload.mimes' => 'File tải lên phải có đuôi: jpeg, png, jpg, gif',
+            'upload.max' => 'File tải lên không đc quá 2MB!'
+        ]);
             if ($rq->hasFile('upload')) {
                 $file = $rq->file('upload');
                 $image = time().'-'.$file->getClientOriginalName('upload');
@@ -297,10 +299,11 @@ class AdminController extends Controller
     public function post_addBan(Request $rq)
     {   
         $this->validate($rq,[
-            'upload' => 'image|max:2028'
+            'upload' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ],[
-            'upload.image' => 'Định dạng không cho phép!',
-            'upload.max' => 'Kích thước file quá lớn',
+            'upload.image' => 'File tải lên không phải định dạng ảnh!',
+            'upload.mimes' => 'File tải lên phải có đuôi: jpeg, png, jpg, gif',
+            'upload.max' => 'File tải lên không đc quá 2MB!'
         ]);
 
         $file = $rq->file('upload');
@@ -331,10 +334,11 @@ class AdminController extends Controller
         $ban->type = $rq->type;
 
         $this->validate($rq,[
-            'upload' => 'image|max:2028'
+            'upload' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ],[
-            'upload.image' => 'Định dạng không cho phép!',
-            'upload.max' => 'Kích thước file quá lớn',
+            'upload.image' => 'File tải lên không phải định dạng ảnh!',
+            'upload.mimes' => 'File tải lên phải có đuôi: jpeg, png, jpg, gif',
+            'upload.max' => 'File tải lên không đc quá 2MB!'
         ]);
             if ($rq->hasFile('upload')) {
                 $file = $rq->file('upload');
@@ -410,10 +414,11 @@ class AdminController extends Controller
         //     ]);
 
         $this->validate($rq,[
-            'upload' => 'image|max:2028'
+            'upload' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ],[
-            'upload.image' => 'Định dạng không cho phép!',
-            'upload.max' => 'Kích thước file quá lớn',
+            'upload.image' => 'File tải lên không phải định dạng ảnh!',
+            'upload.mimes' => 'File tải lên phải có đuôi: jpeg, png, jpg, gif',
+            'upload.max' => 'File tải lên không đc quá 2MB!'
         ]);
          $file = $rq->file('upload');
         // getClientOriginalNam để lấy tên gốc của ảnh
@@ -457,12 +462,13 @@ class AdminController extends Controller
             $edit->phone = $rq->phone;
             $edit->address = $rq->address;
 
-            $this->validate($rq,[
-                'upload' => 'image|max:2028'
-            ],[
-                'upload.image' => 'Định dạng không cho phép!',
-                'upload.max' => 'Kích thước file quá lớn',
-            ]);
+           $this->validate($rq,[
+            'upload' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ],[
+            'upload.image' => 'File tải lên không phải định dạng ảnh!',
+            'upload.mimes' => 'File tải lên phải có đuôi: jpeg, png, jpg, gif',
+            'upload.max' => 'File tải lên không đc quá 2MB!'
+        ]);
             if ($rq->hasFile('upload')) {
                 $file = $rq->file('upload');
                 $image = time().'-'.$file->getClientOriginalName('upload');
